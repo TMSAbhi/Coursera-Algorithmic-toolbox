@@ -1,0 +1,113 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+double get_optimal_value(int capacity, vector<int> weights, vector<int> values)
+{
+  long double value = 0.0;
+
+  vector<double> v(values.size()); /// Empty Vector of size equal to values vector
+
+  vector<double>::iterator p; /// iterator for all vectors
+  vector<int>::iterator it1;
+  vector<int>::iterator it2;
+
+  p = v.begin(); ///  Initializing Iterator
+  it1 = values.begin();
+  it2 = weights.begin();
+
+  double max = 0; /// Creating variable for
+  int max_index = 0;
+
+  int temp_cap = capacity;
+
+  for (int i = 0; i < values.size(); i++) /// Calculating Value/Weight ration and inserting it into the (v) vector
+  {
+    long double temp = 0.000;
+    temp = (double)values[i] / weights[i];
+
+    v[i] = temp;
+  }
+
+  while (true)
+  {
+
+    if (temp_cap == 0 or temp_cap < 0) // Breaking condition
+    {
+      break;
+    }
+
+    if (v.size() == 1)      /// special condition for vector with size 1
+    {
+
+      if (weights[0] < temp_cap)
+      {
+        temp_cap -= weights[0];
+
+        value += values[0];
+
+        break;
+      }
+      else
+      {
+        value += values[0] * ((double)temp_cap / weights[0]);
+        break;
+      }
+    }         
+
+    for (int i = 0; i < v.size(); i++)      /// finding Max ration index
+    {
+      if (v[i] > max)
+      {
+        max = v[i];
+        max_index = i;
+      }
+    }
+
+    if (weights[max_index] <= temp_cap)     ///  if weight is less than available capacity
+    {
+      temp_cap -= weights[max_index];
+
+      value += values[max_index];
+
+      v.erase(p + max_index);             /// remove all the occurance of that value and weight which is already added to knapsack
+      values.erase(it1 + max_index);
+      weights.erase(it2 + max_index);
+
+
+      max = 0;      
+      max_index = 0;
+      continue;
+    }
+
+    if (weights[max_index] > temp_cap and temp_cap > 0) /// if weight is greater than the availabe capacity
+    {
+
+      value += values[max_index] * ((double)temp_cap / weights[max_index]);
+
+      temp_cap -= temp_cap;
+    }
+  }
+
+  return value;
+}
+
+int main()
+{
+  int n;
+  int capacity;
+  std::cin >> n >> capacity;
+  vector<int> values(n);
+  vector<int> weights(n);
+  for (int i = 0; i < n; i++)
+  {
+    std::cin >> values[i] >> weights[i];
+  }
+
+  double optimal_value = get_optimal_value(capacity, weights, values);
+
+  std::cout.precision(10);
+  std::cout << optimal_value << std::endl;
+  return 0;
+  
+}
