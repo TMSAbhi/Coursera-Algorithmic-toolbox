@@ -2,4 +2,6 @@
 Solutions of Assignments
 
 
-Maximum Value of the Loot (Fractional Knapsack) C++ Solution (Not optimized)
+1)Maximum Value of the Loot (Fractional Knapsack) C++ Solution (Not optimized -Brute Force)
+2)Car Fueling (Not optimized -Brute Force)
+
