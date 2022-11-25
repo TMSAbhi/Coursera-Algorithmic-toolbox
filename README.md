@@ -7,3 +7,5 @@ Solutions of Assignments
 
 2)Car Fueling (Not optimized -Brute Force)
 
+3)Binary Search Duplicates
+
