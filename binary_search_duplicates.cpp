@@ -37,18 +37,7 @@ int binary_search(const vector<int> &a, int x)
           mid--;
         }
       }
-      // else if (a[mid + 1] == x)
-      // {
-      //   while (true)
-      //   {
-      //     if (a[mid + 1] != x)
-      //     {
-      //       return mid;
-      //     }
-
-      //     mid++;
-      //   }
-      // }
+      
       else
       {
         return mid;
@@ -59,7 +48,7 @@ int binary_search(const vector<int> &a, int x)
 
   return -1;
 }
-// cout<<"here";
+
 
 
 int linear_search(const vector<int> &a, int x)
@@ -93,7 +82,5 @@ int main()
     // replace with the call to binary_search when implemented
     std::cout << binary_search(a, b[i]) << ' ';
   }
-  // int x = 7;
-  // vector<int> a{3 ,4 ,5 ,6, 7, 7, 7, 8};
-  // cout << binary_search(a, x);
+ 
 }
